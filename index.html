@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- WCAG 2.4.2: Descriptive page title -->
+    <title>Student Dashboard | College Portal</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5fa;
+            color: #222222;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #29205c;
+            color: #ffffff;
+            padding: 1.25rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.75rem;
+        }
+
+        .container {
+            padding: 1.5rem;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        /* WCAG 1.4.3: Sufficient text contrast */
+        .light-text {
+            color: #595959;
+            font-size: 0.95rem;
+        }
+
+        /* WCAG 1.4.4: Scalable text */
+        .fixed-text {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* WCAG 1.4.11: Visible card boundaries */
+        .card {
+            border: 1px solid #767676;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            background: #ffffff;
+            border-radius: 6px;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* WCAG 1.3.2: Natural reading order */
+        /* No CSS order manipulation */
+
+        .profile-image {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        /* WCAG 1.4.11: Sufficient input boundary contrast */
+        input {
+            display: block;
+            width: 100%;
+            max-width: 450px;
+            padding: 0.75rem;
+            margin: 0.5rem 0 1rem;
+            border: 2px solid #595959;
+            border-radius: 4px;
+            font-size: 1rem;
+            background: #ffffff;
+            color: #222222;
+        }
+
+        button {
+            background: #29205c;
+            color: #ffffff;
+            border: 2px solid #29205c;
+            padding: 0.75rem 1.25rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Visible keyboard focus */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #b45309;
+            outline-offset: 3px;
+        }
+
+        a {
+            color: #003f8c;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .notice {
+            width: 100%;
+            max-width: 400px;
+            min-height: 2.5rem;
+            padding: 0.5rem;
+            overflow-wrap: anywhere;
+            font-size: 1rem;
+            background: #ffffff;
+            border: 1px solid #767676;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Student Dashboard</h1>
+
+        <p>
+            Welcome to your student portal
+        </p>
+    </header>
+
+    <main class="container">
+
+        <!-- WCAG 1.1.1: Alternative text added -->
+        <section class="card" aria-labelledby="profile-heading">
+
+            <h2 id="profile-heading">Student Profile</h2>
+
+            <img
+                src="https://placehold.co/150x100"
+                alt="Student profile placeholder image"
+                class="profile-image"
+            >
+
+            <p class="light-text">
+                View your student profile information.
+            </p>
+
+        </section>
+
+
+        <div class="dashboard">
+
+            <!-- WCAG 1.3.2: Logical reading sequence -->
+            <section class="card"
+                     aria-labelledby="announcements-heading">
+
+                <h2 id="announcements-heading">
+                    Announcements
+                </h2>
+
+                <p>
+                    New semester registration is open.
+                </p>
+
+                <!-- WCAG 2.4.4: Descriptive link purpose -->
+                <a href="#registration">
+                    Go to semester registration form
+                </a>
+
+            </section>
+
+
+            <section class="card"
+                     aria-labelledby="academic-heading">
+
+                <h2 id="academic-heading">
+                    Academic Information
+                </h2>
+
+                <p class="light-text">
+                    Your attendance percentage is 85%.
+                </p>
+
+                <p class="light-text">
+                    Your assignment deadline is approaching.
+                </p>
+
+                <!-- WCAG 1.4.4: Resizable text -->
+                <p class="fixed-text">
+                    This is important information about your
+                    academic progress.
+                </p>
+
+            </section>
+
+
+            <section class="card"
+                     aria-labelledby="actions-heading">
+
+                <h2 id="actions-heading">
+                    Quick Actions
+                </h2>
+
+                <!-- WCAG 4.1.2: Native accessible button -->
+                <button type="button" onclick="showMessage()">
+                    View Results
+                </button>
+
+                <p id="message" aria-live="polite"></p>
+
+            </section>
+
+        </div>
+
+
+        <!-- WCAG 1.3.1: Semantic form structure -->
+        <!-- WCAG 2.4.6: Descriptive headings and labels -->
+        <section class="card"
+                 id="registration"
+                 aria-labelledby="registration-heading">
+
+            <h2 id="registration-heading">
+                Student Registration
+            </h2>
+
+            <form onsubmit="submitForm(event)">
+
+                <label for="student-name">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="student-name"
+                    name="studentName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label for="student-email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="student-email"
+                    name="studentEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="department">
+                    Department
+                </label>
+
+                <input
+                    type="text"
+                    id="department"
+                    name="department"
+                    placeholder="Enter your department"
+                    required
+                >
+
+                <button type="submit">
+                    Submit Registration
+                </button>
+
+            </form>
+
+            <p id="form-message" aria-live="polite"></p>
+
+        </section>
+
+
+        <section class="card"
+                 aria-labelledby="settings-heading">
+
+            <h2 id="settings-heading">
+                Notification Settings
+            </h2>
+
+            <!-- WCAG 4.1.2: Native checkbox with accessible name -->
+            <label>
+                <input
+                    type="checkbox"
+                    id="notifications"
+                    name="notifications"
+                >
+                Enable notifications
+            </label>
+
+        </section>
+
+
+        <section class="card"
+                 aria-labelledby="notice-heading">
+
+            <h2 id="notice-heading">
+                Important Notice
+            </h2>
+
+            <!-- WCAG 1.4.4: No restrictive fixed height -->
+            <div class="notice">
+                This is an important notice about your
+                academic activities. Please check your
+                dashboard regularly for updates.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function showMessage() {
+            document.getElementById("message").innerText =
+                "Your results are displayed!";
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+
+            document.getElementById("form-message").innerText =
+                "Registration submitted successfully!";
+        }
+
+    </script>
+
+</body>
+</html>
